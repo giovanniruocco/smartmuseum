@@ -5,7 +5,7 @@
 - [Ruocco Giovanni](https://www.linkedin.com/in/giovanniruocco07)
 - [Ferrara Andrea Gaetano](https://www.linkedin.com/in/andrea-gaetano-ferrara-98a5371a3)
 - [Vona Andrea](https://www.linkedin.com/in/andrea-vona-96b832165)
-- Gironi Camilla
+- [Gironi Camilla](https://www.linkedin.com/in/camilla-gironi)
 
 #### Description
 
