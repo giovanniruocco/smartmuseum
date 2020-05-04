@@ -21,8 +21,7 @@ The idea of the project comes from relevant needs of different users. What came 
  
 From the user point of view, what stands out from the survey is that the experience sometimes can be a little invasive, in fact we can see from the chart below that the 40,9% of them believe that. Also, we can see that for several users the whole experience shouldn’t last longer than 10 minutes. 
  
- IMAGE
-
+![Survey](https://github.com/giovanniruocco/smartmuseum/blob/master/images/Survey.PNG)
 
 In the last question we asked a few suggestions to improve the experience: one that we found interesting is the implementation of a holographic presentation of the work of art. It is a nice idea; we will take in consideration during the second phase of development of our product. 
  
