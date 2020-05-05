@@ -10,7 +10,7 @@ The telemetries about the popularity of the art pieces and the lighting control 
 
 Let’s take a look at each component that makes our product starting with the hardware.
 
-**foto sistema**
+![System](https://github.com/giovanniruocco/smartmuseum/blob/master/images/system.jpg)
 
 ## **Hardware**
 
@@ -19,7 +19,8 @@ Let’s take a look at each component that makes our product starting with the h
 The main hardware component of Look at M.E. is obviously the micro-controller board.
 
 This is a B-L072Z-LRWAN1 which is a board manufactured by STMicroelectronics and is a pretty popular cause of its LoRa compatibility and its LoRaWAN class A certification.
-**foto board**
+
+![Board](https://github.com/giovanniruocco/smartmuseum/blob/master/images/board.PNG)
 
 The entire board’s datasheet can be found at the following link:
 
@@ -58,7 +59,7 @@ Others of its main features are:
 ### **The HC-SR04 proximity sensor**
 
 The HC­SR04 ultrasonic sensor uses sonar to determine distance to an object like bats or dolphins do. It offers excellent non­contact range detection with high accuracy and stable readings in an easy­to­use package. It operates in a distance range going from 2cm to 400 cm. Its operation is not affected by sunlight or black material like Sharp rangefinders are (although acoustically soft materials like cloth can be difficult to detect). It comes complete with an ultrasonic transmitter and receiver module.
-**foto sensore**
+![Sensor 1](https://github.com/giovanniruocco/smartmuseum/blob/master/images/sensor1.PNG)
 
 The main features are :
 
@@ -82,7 +83,7 @@ Features:
    
    - Dimension: 45mm x 20mm x 15mm
 
-**foto sensore 2**
+![Sensor 2](https://github.com/giovanniruocco/smartmuseum/blob/master/images/sensor2.PNG)
 
 The sensor come with 4 pins that correspond to :
 
@@ -128,7 +129,7 @@ MQTT protocol is an open and lightweight publish/subscribe protocol designed spe
 
 MQTT-SN can be considered as a version of MQTT which is adapted to the peculiarities of a wireless communication environment. In fact, it is designed to be as close as possible to MQTT, but is adapted to the peculiarities of a wireless communication environment such as low bandwidth, high link failures, short message length, etc.
 
-**Network image**
+![Network](https://github.com/giovanniruocco/smartmuseum/blob/master/images/network.png)
 
 ---
 
@@ -186,6 +187,6 @@ It will be a simple HTML page with some CSS style and some Javascript code that 
 
 The web page will be accessible only by authorized staff so that the info stored in it can be kept safe.
 
-**mockup image**
+![Web App Mockup](https://github.com/giovanniruocco/smartmuseum/blob/master/images/mockup.jpg)
 
 
