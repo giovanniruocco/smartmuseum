@@ -32,7 +32,7 @@ a reset button. It contains everything needed to support the microcontroller; si
 connect it to a computer with a USB cable or power it with an AC-to-DC adapter or
 battery to get started.
 
-![Board](https://github.com/giovanniruocco/smartmuseum/blob/master/images/board.PNG)
+![Board](https://github.com/giovanniruocco/smartmuseum/blob/master/images/board1_28.PNG)
 
 The entire board’s datasheet can be found at the following link:
 
@@ -64,7 +64,9 @@ Others of its main features are:
 
 - Clock Speed ________________________________________________________16 MHZ
 
-![Board](https://github.com/giovanniruocco/smartmuseum/blob/master/images/board.PNG)
+![Board](https://github.com/giovanniruocco/smartmuseum/blob/master/images/board2_28.PNG)
+
+![Scheme](https://github.com/giovanniruocco/smartmuseum/blob/master/images/boardScheme.PNG)
 	
 ---
 
