@@ -54,6 +54,7 @@ From the 1st delivery a lot of changes were made regarding the Design and Archit
 - [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture.md)
 - [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Evaluation.md)
 - [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation.pdf)
+- [1st Delivery Markdown](https://github.com/giovanniruocco/smartmuseum/blob/master/1st-Delivery.md)
 
 ### Video:
 
