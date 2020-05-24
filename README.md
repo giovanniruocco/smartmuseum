@@ -1,7 +1,7 @@
 
 # Look at M.E.
 
-![Project Logo](logo.png)
+![Project Logo](https://github.com/giovanniruocco/smartmuseum/blob/master/images/logo.png)
 
 ## IoT Course 2020 - MSc Engineering in computer science - Sapienza
 
