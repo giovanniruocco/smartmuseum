@@ -24,7 +24,6 @@ Let’s take a look at each component that makes our product starting with the h
 ### **Elegoo UNO R3**
 
 
-Elegoo UNO R3
 The ELEGOO UNO is a microcontroller board based on the ATmega328 (datasheet). It
 has 14 digital input/output pins (of which 6 can be used as PWM outputs), 6 analog
 inputs, a 16 MHz crystal oscillator, a USB connection, a power jack, an ICSP header, and
