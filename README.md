@@ -28,7 +28,7 @@ The project's development will be reported following each step and new implement
 #### 28/05/2020 Updated Documents
 
 - [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Design.md)
-- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture.md)
+- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture_2805.md)
 - [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Evaluation.md)
 - [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation.pdf)
 
