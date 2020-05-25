@@ -50,11 +50,11 @@ From the 1st delivery a lot of changes were made regarding the Design and Archit
 
 #### 30/04/2020 Documents
 
-- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Design.md)
-- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture.md)
-- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Evaluation.md)
-- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation.pdf)
-- [1st Delivery Markdown](https://github.com/giovanniruocco/smartmuseum/blob/master/1st-Delivery.md)
+- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Design.md)
+- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Architecture.md)
+- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Evaluation.md)
+- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Presentation.pdf)
+- [1st Delivery Markdown](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery.md)
 
 ### Video:
 
