@@ -21,7 +21,7 @@ Let’s take a look at each component that makes our product starting with the h
 
 ## **Hardware**
 
-### **B-L072Z-LRWAN1**
+### **Elegoo UNO R3**
 
 
 Elegoo UNO R3
