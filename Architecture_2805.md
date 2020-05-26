@@ -130,6 +130,10 @@ In the actual production of the project we needed and implemented other hardware
 
 Also, we have some hardware external to our board, for example the light and sound system that our application will use to express its full potential. In fact this will subscribe to the topic in our broker so that on a new trigger message the guided tour will start. These are external since we are not implementing them on the board but must be connected to our broker in order to receive the values that trigger them, but we will simulate them via simple clients script that retrieve values via MQTT.
 
+### **Sketch of the Board and hardware**
+
+
+![Board Sketch](https://github.com/giovanniruocco/smartmuseum/blob/master/images/Sketch.png)
 
 # **Software and tools**
 
