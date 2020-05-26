@@ -17,7 +17,7 @@ The telemetries about the popularity of the art pieces and the lighting control 
 
 Let’s take a look at each component that makes our product starting with the hardware.
 
-![System](https://github.com/giovanniruocco/smartmuseum/blob/master/images/system.jpg)
+![System](https://github.com/giovanniruocco/smartmuseum/blob/master/images/Updated_System.jpg)
 
 ## **Hardware**
 
