@@ -111,6 +111,26 @@ GND = GND
 To start the measurement, Trig of SR04 must receive a pulse of high (5V) for at least 10us, this will initiate the sensor will transmit out 8 cycle of ultrasonic burst at 40kHz and wait for the reflected ultrasonic burst. When the sensor detected ultrasonic from the receiver, it will set the Echo pin to high (5V) and delay for a period (width) which proportion to distance. To obtain the distance, measure the width (Ton) of the Echo pin.
 
 ----
+
+### **HC 5 Bluetooth module**
+
+The HC-05 is a very cool module which can add two-way (full-duplex) wireless functionality to your projects. You can use this module to communicate between two microcontrollers like Arduino or communicate with any device with Bluetooth functionality like a Phone or Laptop. The module communicates with the help of USART at 9600 baud rate hence it is easy to interface with any microcontroller that supports USART. We can also configure the default values of the module by using the command mode. So if you looking for a Wireless module that could transfer data from your computer or mobile phone to microcontroller or vice versa then this module might be the right choice for you.
+
+Pin Configuration
+
+
+| Pin Number | Pin Name  | Description |
+|--|--|--|
+|  1| Enable Key  | This pin is used to toggle between Data Mode (set low) and AT command mode (set high). By default it is in Data mode  |
+|2|Vcc|Powers the module. Connect to +5V Supply voltage|
+|  3| Ground  | Ground pin of module, connect to system ground.|
+|  4| TX  | Transmits Serial Data. Everything received via Bluetooth will be given out by this pin as serial data.|
+|  5| RX | Receive Serial Data. Every serial data given to this pin will be broadcasted via Bluetooth.|
+|  6| State| The state pin is connected to on board LED, it can be used as a feedback to check if Bluetooth is working properly.|
+|  7| LED |  Indicates the status of Module |
+|  8| Button | Used to control the Key/Enable pin to toggle between Data and command Mode|
+
+
 ### **Other Hardware Components**
 
 In the actual production of the project we needed and implemented other hardware components; these are just standard components needed to complete the product but have no specific purpose.
@@ -123,12 +143,17 @@ In the actual production of the project we needed and implemented other hardware
 
 - 2 resistors
 
+![HC5](https://github.com/giovanniruocco/smartmuseum/blob/master/images/HC-05-Bluetooth-Module-Circuit-Connections.png)
+
+
 
 ---
 
 ### **External Hardware**
 
 Also, we have some hardware external to our board, for example the light and sound system that our application will use to express its full potential. In fact this will subscribe to the topic in our broker so that on a new trigger message the guided tour will start. These are external since we are not implementing them on the board but must be connected to our broker in order to receive the values that trigger them, but we will simulate them via simple clients script that retrieve values via MQTT.
+
+Moreover, we need a computer to be connected via bluetooth to the board so that the board can use it the create the data files and execute the needed scripts.
 
 ### **Sketch of the Board and hardware**
 
@@ -153,6 +178,22 @@ Programs written using Arduino Software (IDE) are called sketches. These sketche
 
 
 MQTT stands for MQ Telemetry Transport. It is a publish/subscribe, extremely simple and lightweight messaging protocol, designed for constrained devices and low-bandwidth, high-latency or unreliable networks. The design principles are to minimise network bandwidth and device resource requirements whilst also attempting to ensure reliability and some degree of assurance of delivery. These principles also turn out to make the protocol ideal of the emerging “machine-to-machine” (M2M) or “Internet of Things” world of connected devices, and for mobile applications where bandwidth and battery power are at a premium.
+
+
+---
+
+### **HiveMQ**
+
+
+HiveMQ is a MQTT broker and a client based messaging platform designed for the fast, efficient and reliable movement of data to and from connected IoT devices. It uses the MQTT protocol for instant, bi-directional push of data between your device and your enterprise systems.
+
+HiveMQ is built to address some of the key technical challenges organizations face when building new Internet of Things applications, including:
+- Building reliable and scalable business critical IoT applications
+- Fast data delivery to meet the expectations of end users for responsive IoT products
+- Lower cost of operation through efficient use of hardware, network and cloud resources
+- Integrating IoT data into existing enterprise systems
+
+We will use HiveMQ to create clients so that we can simulate for now the external hardware components that subscribe to the topics. They will probably be substituted later with the real devices.
 
 
 ---
