@@ -131,6 +131,9 @@ Pin Configuration
 |  8| Button | Used to control the Key/Enable pin to toggle between Data and command Mode|
 
 
+![HC5](https://github.com/giovanniruocco/smartmuseum/blob/master/images/HC-05-Bluetooth-Module-Circuit-Connections.png)
+
+
 ### **Other Hardware Components**
 
 In the actual production of the project we needed and implemented other hardware components; these are just standard components needed to complete the product but have no specific purpose.
@@ -143,7 +146,6 @@ In the actual production of the project we needed and implemented other hardware
 
 - 2 resistors
 
-![HC5](https://github.com/giovanniruocco/smartmuseum/blob/master/images/HC-05-Bluetooth-Module-Circuit-Connections.png)
 
 
 
