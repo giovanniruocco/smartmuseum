@@ -1,0 +1,86 @@
+﻿body
+{
+
+background-color: #EFC69B;
+
+}
+
+#header {
+  /* The image used */
+  background-image: url("museo.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+#up:hover {color: blue}
+tr:nth-child(even){background-color: #F9DEC9}
+tr:nth-child(odd){background-color: #FFB58D}
+tr:hover {background-color: #E8CBC7}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+table{
+	border-collapse: collapse;  
+    position: relative;
+    right: 10%;
+    width: 125%;
+}
+
+th
+{
+
+background-color: #6F1A07;
+height: 50px;
+width: 10%;
+text-align: center;
+padding: 3px;
+color: white;
+
+}
+
+td{
+
+text-align: center;
+padding: 3px;
+
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #610505;
+  top: 0px;
+  position: sticky;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #910808;
+}
+
+.active {
+  background-color: #DE7C5A;
+}
