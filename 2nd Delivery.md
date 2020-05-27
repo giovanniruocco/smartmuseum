@@ -21,6 +21,6 @@ The web application is still working in progress.
 ## Current Evaluation
 From a technical point of view we have begun to consider the precision of the proximity sensors, which we are using to measure the replicas' popularity. Also, we have deployed a very naive system for measuring the popularity which will be improved in the final deliver.
 From a user point of view, the results of the survey are displayed in the below chart.
-[chart]
+![Survey](https://github.com/giovanniruocco/smartmuseum/blob/master/images/Survey.PNG)
 ## Further Evaluations
 In the final delivery of the project, we intend to collect users' reviews for the different rooms in the museum, focusing on the impact of Look at M.E. by confronting the result of the rooms with and without Look at M.E.
