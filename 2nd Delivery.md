@@ -11,6 +11,7 @@ Other comments regarded what criteria we were going to follow, to order the repl
 ## Changes
 The major change is leaving LORA in favor of a pure MQTT architecture for the communications between the end nodes and the cloud infrastructure (ThingsBoard). This had repercussions on the hardware used, in particular, we switched from a B-L072Z-LRWAN1 "st-lora" board to a ELEGOO UNO microcontroller.
 The ELEGOO UNO microcontroller will use a Bluetooth module to send the data to a pc. The next section will provide more details about the new architecture.
+No changes although were made in the "Design" document, since from a user perspective no functionalities or changes are introduced.
 
 ## Technical Work Done So Far
 Up to this moment, we have developed the firmware for the ELEGOO UNO microcontroller. It is fully operative in controlling the proximity sensors, the button and the led. Through a Bluetooth module it communicates with a pc that has a python script running which has two functions: storing persistently the data and publishing data to the MQTT "HiveMQ" broker. This broker will forward the messages to both the MQTT clients subscribed and the ThingsBoard broker.
