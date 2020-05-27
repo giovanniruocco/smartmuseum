@@ -16,7 +16,7 @@ Up to this moment, we have developed the firmware for the ELEGOO UNO microcontro
 
 ## Momentarily Missing Features
 Up to this moment, the clients are python scripts which emulate the behavior of both the illumination and the smart speakers, which will be replaced with real ones. 
-The web application is not implemented yet.
+The web application is still working in progress.
 
 ## Current Evaluation
 From a technical point of view we have begun to consider the precision of the proximity sensors, which we are using to measure the replicas' popularity. Also, we have deployed a very naive system for measuring the popularity which will be improved in the final deliver.
