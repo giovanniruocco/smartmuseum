@@ -37,7 +37,7 @@ The project's development will be reported following each step and new implement
 
 #### 28/05/2020 Updated Videos and Presentations
 
-- [Idea](https://www.youtube.com/watch?v=_c1rHA_vbpU)
+- [Future Plans](https://youtu.be/mgdUje6jdrk)
 - [Evaluation](https://youtu.be/G556htPPm2g)
 - [Technical presentation and Demo](https://www.youtube.com/watch?v=qv295bPE5Qw)
 
