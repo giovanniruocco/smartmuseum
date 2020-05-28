@@ -31,7 +31,7 @@ The project's development will be reported following each step and new implement
 - [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Design_2805.md)
 - [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture_2805.md)
 - [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Evaluation_2805.md)
-- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation.pdf)
+- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation_2805.pptx)
 
 ### Video:
 
