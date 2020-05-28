@@ -39,7 +39,7 @@ The project's development will be reported following each step and new implement
 
 - [Idea](https://www.youtube.com/watch?v=_c1rHA_vbpU)
 - [Evaluation](https://youtu.be/G556htPPm2g)
-- [Technical presentation](https://www.youtube.com/watch?v=XWXVBEEmsI0&feature=youtu.be)
+- [Technical presentation and Demo](https://www.youtube.com/watch?v=qv295bPE5Qw)
 
 ## Older Entries:
 
