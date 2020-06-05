@@ -7,7 +7,7 @@ In this document we will review the new state of the architecture of Look at M.E
 
 The older version of this document will be available in the main repository of Look at M.E. so that anyone who wishes to can take a look at the evolution of the project.
 
-[Older Architecture version](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture.md)
+[Older Architecture version](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/Architecture.md)
 
 Look at M.E. is built in a Elegoo UNO R3 board in which we implemented an HC-SR04 ultrasonic proximity sensor to determine whether a visitor is in the “attention area” for each statue. Also we will use a button to trigger the changing of the lighting and sound of the room to create for the user a guided tour in the room.
 
