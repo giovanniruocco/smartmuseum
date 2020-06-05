@@ -25,17 +25,17 @@ The project's development will be reported following each step and new implement
 
 ### Documents:
 
-#### 28/05/2020 Updated Documents
+#### 08/06/2020 Updated Documents
 
 - [Second Delivery](https://github.com/giovanniruocco/smartmuseum/blob/master/2nd%20Delivery.md)
 - [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Design_2805.md)
-- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture_2805.md)
-- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Evaluation_2805.md)
+- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture_0806.md)
+- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Evaluation_0806.md)
 - [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation_2805.pptx)
 
 ### Video:
 
-#### 28/05/2020 Updated Videos and Presentations
+#### 08/06/2020 Updated Videos and Presentations
 
 - [Future Plans](https://youtu.be/mgdUje6jdrk)
 - [Evaluation](https://youtu.be/G556htPPm2g)
