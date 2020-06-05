@@ -250,6 +250,12 @@ This is the place where all the data we send will be stored, we can then use the
 
 In order to use the site, we will need a free account that can be created following the standard procedure.
 
+Also in Thingsboard we created a data converter and a rule chain to get the telemetries from HiveMQ and to check by script if the distance is under a set threshold in which case we will set the Alarm telemetry to "ON".
+
+![Data Converter](https://github.com/giovanniruocco/smartmuseum/blob/master/images/data.PNG)
+
+![Rule Chain](https://github.com/giovanniruocco/smartmuseum/blob/master/images/chain.PNG)
+
 ---
 
 ### **Web Application**
