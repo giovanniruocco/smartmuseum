@@ -64,3 +64,24 @@ From the 1st delivery a lot of changes were made regarding the Design and Archit
 
 - [Idea and Evaluation presentation](https://www.youtube.com/watch?v=_c1rHA_vbpU)
 - [Technical presentation](https://www.youtube.com/watch?v=XWXVBEEmsI0&feature=youtu.be)
+
+### 2nd Delivery
+
+Here you will find the documents of the project state as of 28/05/2020.
+Since the second delivery we have made some changes in the goal of the project so all the documents were modified accordingly.
+
+#### 28/05/2020 Documents
+
+- [Second Delivery](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery.md)
+- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Design_2805.md)
+- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Architecture_2805.md)
+- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Evaluation_2805.md)
+- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation_2805.pptx)
+
+### Video:
+
+#### 28/05/2020 Videos and Presentations
+
+- [Future Plans](https://youtu.be/mgdUje6jdrk)
+- [Evaluation](https://youtu.be/G556htPPm2g)
+- [Technical presentation and Demo](https://www.youtube.com/watch?v=qv295bPE5Qw)
