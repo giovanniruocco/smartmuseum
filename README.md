@@ -18,7 +18,7 @@ The project was developed as part of the Internet of Things course, here are our
 Look at M.E. is an IoT device which is able to improve the user experience for the museum visitors and to provide important data to the museum curator.
 
 Look at M.E. use a HC-SR04 proximity sensor implemented in a Elegoo UNO R3 board capable of activating a light-guided tour supported also by an audio explaination of the art pieces in order to emphasize differents feature of an art display.
-Moreover, with a simple algorithm, it can build a ranking table for the curator so that he can know which artwork is more popular among the visitors.
+Moreover, it can build a table to show in real time the distance to the statues of the museum visitors, to make sure that no one is getting too close to an art piece.
 The project's development will be reported following each step and new implementation, in fact in this repository you can find the documents of the present state of the product as well as the older markdown files and video.
 
 ## Contents:
