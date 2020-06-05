@@ -21,6 +21,8 @@ def on_message(client, userdata, msg):
     if("Trigger" in data):
         if(data["Trigger"] == 1 and not execution):
             execution = True
+            payload = "{\"devName\": \"Tour\", \"ActivateClient1\": 1, \"ActivateClient2\": 0, \"ActivateClient3\": 0 }"
+            client.publish("tb/mqtt-integration/tour", payload)
             print("Lights on Statue 1")
             time.sleep(1)
             print('Playing recordings...')
