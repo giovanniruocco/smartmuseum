@@ -163,7 +163,7 @@ Moreover, we need a computer to be connected via bluetooth to the board so that 
 ### **Sketch of the Board and hardware**
 
 
-![Board Sketch](https://github.com/giovanniruocco/smartmuseum/blob/master/images/Sketch.png)
+![Board Sketch](https://github.com/giovanniruocco/smartmuseum/blob/master/images/Sketch_final.png)
 
 # **Software and tools**
 
