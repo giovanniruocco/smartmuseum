@@ -260,6 +260,6 @@ It will be a simple HTML page with CSS style and Javascript code that will manag
 
 The site is made by several pages each one showing important data and informations.
 
-![Web App Mockup](https://github.com/giovanniruocco/smartmuseum/blob/master/images/images.png)
+![Web App](https://github.com/giovanniruocco/smartmuseum/blob/master/images/site.png)
 
 
