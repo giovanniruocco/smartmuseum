@@ -7,14 +7,14 @@ In this document we will review the new state of the architecture of Look at M.E
 
 The older version of this document will be available in the main repository of Look at M.E. so that anyone who wishes to can take a look at the evolution of the project.
 
-- [Architecture version 30/04](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Architecture.md)
-- [Architecture version 28/05](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/Architecture_2805.md)
+- [Architecture version 30/04](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/Architecture.md)
+- [Architecture version 28/05](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/Architecture_2805.md)
 
 Look at M.E. is built in a Elegoo UNO R3 board in which we implemented an HC-SR04 ultrasonic proximity sensor to determine whether a visitor is in the “attention area” for each statue. Also we will use a button to trigger the changing of the lighting and sound of the room to create for the user a guided tour in the room.
 
 As for the software components, we created the main firmware file in the Arduino IDE, the telemetries will be managed by the cloud-based broker Thingsboard and then retrieved on a web page to show all the important information to the museum curator.
 
-The telemetries about the popularity of the art pieces and the lighting control will be sent via MQTT to our cloud broker. The telemetries will be then retrieved by the external hardware components that subscribe to the respective topic to receive updates.
+The telemetries about the security of the art pieces and the lighting control will be sent via MQTT to our cloud broker. The telemetries will be then retrieved by the external hardware components that subscribe to the respective topic to receive updates.
 
 Let’s take a look at each component that makes our product starting with the hardware.
 
