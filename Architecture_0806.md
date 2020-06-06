@@ -254,7 +254,15 @@ Also in Thingsboard we created a data converter and a rule chain to get the tele
 
 ![Data Converter](https://github.com/giovanniruocco/smartmuseum/blob/master/images/data.PNG)
 
-![Rule Chain](https://github.com/giovanniruocco/smartmuseum/blob/master/images/chain.PNG)
+![Rule Chain](https://github.com/giovanniruocco/smartmuseum/blob/master/images/newchain.PNG)
+
+---
+
+### **Telegram Bot**
+
+As we said the real-time data is shown in the web page that is accesible by the museum staff, but obviously we cannot expect that one member of the security is watching the page at any given time. So, we wanted a way to notify who of duty in such a way that he can work on his tasks normally and act when the need occurs.
+
+To do so, we implemented via Thingsboard an integration to a Telegram bot that sends a message when an infraction is in act giving also the ID of the concerned statue
 
 ---
 
