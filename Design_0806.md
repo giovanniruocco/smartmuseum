@@ -8,8 +8,8 @@ Look at M.E. is a service that tries to collect data for the “Museum of Classi
 We will begin with the personas we used to empathize with their needs, also, later denoting them through storyboards. Then, we will underline problems, or simply weaknesses that a regular visit to the Museum of Classical Arts of Sapienza could highlight. Finally, we will give a complete overview of Look at M.E.’s functionalities, implicitly presenting the solutions we applied to solve the issues.
 
 These are the links to the previous documents:
--[Design, second delivery, 28/05](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/Design_2805.md)
--[Design, first delivery](google.it)
+ - [Design, second delivery, 28/05](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/Design_2805.md)
+ - [Design, first delivery](google.it)
 
 # Personas
 
