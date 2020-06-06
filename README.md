@@ -28,7 +28,7 @@ The project's development will be reported following each step and new implement
 #### 08/06/2020 Updated Documents
 
 - [Third Delivery](https://github.com/giovanniruocco/smartmuseum/blob/master/3rd%20Delivery.md)
-- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Design_2805.md)
+- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Design_0806.md)
 - [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture_0806.md)
 - [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Evaluation_0806.md)
 - [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation_2805.pptx)
