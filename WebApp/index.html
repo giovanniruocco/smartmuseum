@@ -1,0 +1,779 @@
+
+<html>
+<head>
+
+	<link rel="stylesheet" href="web/css1.css" type="text/css" media="screen, projection">
+
+	<script src="https://kit.fontawesome.com/c41d189736.js" crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    <script type="text/javascript">
+
+		var ascending = false;
+	
+
+		function sortTableSec() {
+		console.log("sorting");
+		  var table, rows, switching, i, x, y, shouldSwitch;
+		  table = document.getElementById("TabSec");
+		  switching = true;
+		  /*Make a loop that will continue until
+		  no switching has been done:*/
+			if (ascending == false) {
+				ascending = true;
+			} else {
+				ascending = false;
+			}
+
+
+			if (ascending == true) {
+
+				while (switching) {
+					//start by saying: no switching is done:
+					switching = false;
+					rows = table.rows;
+					/*Loop through all table rows (except the
+					first, which contains table headers):*/
+					for (i = 1; i < (rows.length - 1); i++) {
+					//start by saying there should be no switching:
+					shouldSwitch = false;
+					/*Get the two elements you want to compare,
+					one from current row and one from the next:*/
+					x = rows[i].getElementsByTagName("TD")[1];
+					y = rows[i + 1].getElementsByTagName("TD")[1];
+					//check if the two rows should switch place:
+					if (Number(x.innerHTML) < Number(y.innerHTML)) {
+						//if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;
+					}
+					}
+					if (shouldSwitch) {
+					/*If a switch has been marked, make the switch
+					and mark that a switch has been done:*/
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					}
+				}
+			} else {
+
+		  while (switching) {
+			//start by saying: no switching is done:
+			switching = false;
+			rows = table.rows;
+			/*Loop through all table rows (except the
+			first, which contains table headers):*/
+			for (i = 1; i < (rows.length - 1); i++) {
+			  //start by saying there should be no switching:
+			  shouldSwitch = false;
+			  /*Get the two elements you want to compare,
+			  one from current row and one from the next:*/
+			  x = rows[i].getElementsByTagName("TD")[1];
+			  y = rows[i + 1].getElementsByTagName("TD")[1];
+			  //check if the two rows should switch place:
+			  if (Number(x.innerHTML) > Number(y.innerHTML)) {
+				//if so, mark as a switch and break the loop:
+				shouldSwitch = true;
+				break;
+			  }
+			}
+			if (shouldSwitch) {
+			  /*If a switch has been marked, make the switch
+			  and mark that a switch has been done:*/
+			  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			  switching = true;
+			}
+		  }
+			}
+	}
+
+
+function RealtimeSecurity() {
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg";
+			var entityId = "38327840-a5a5-11ea-9489-bdb47a748ec1";
+            var webSocket = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket.close();
+            }
+
+            webSocket.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket.send(data);
+
+                
+            };
+
+            webSocket.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[1].cells[0].innerHTML = formattedTime;
+				table.rows[1].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[1].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[1].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[1].cells[3].innerHTML == "OFF") {
+					table.rows[1].cells[3].style.backgroundColor = "green";
+					table.rows[1].cells[3].style.color = "white";
+				} else {
+					table.rows[1].cells[3].style.backgroundColor = "red";
+				}
+                
+            };
+
+            webSocket.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+
+		function RealtimeSecurity2() {
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg";
+			var entityId = "2a5a8bb0-a66b-11ea-9489-bdb47a748ec1";
+            var webSocket2 = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket2.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket2.close();
+            }
+
+            webSocket2.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket2.send(data);
+
+                
+            };
+
+            webSocket2.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[2].cells[0].innerHTML = formattedTime;
+				table.rows[2].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[2].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[2].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[2].cells[3].innerHTML == "OFF") {
+					table.rows[2].cells[3].style.backgroundColor = "green";
+					table.rows[2].cells[3].style.color = "white";
+				} else {
+					table.rows[2].cells[3].style.backgroundColor = "red";
+				}
+                
+            };
+
+            webSocket2.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+		function RealtimeSecurity3() {
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg";
+			var entityId = "b53c5ea0-a66d-11ea-9489-bdb47a748ec1";
+            var webSocket = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket.close();
+            }
+
+            webSocket.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket.send(data);
+
+                
+            };
+
+            webSocket.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[3].cells[0].innerHTML = formattedTime;
+				table.rows[3].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[3].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[3].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[3].cells[3].innerHTML == "OFF") {
+					table.rows[3].cells[3].style.backgroundColor = "green";
+					table.rows[3].cells[3].style.color = "white";
+				} else {
+					table.rows[3].cells[3].style.backgroundColor = "red";
+				}
+                
+            };
+
+            webSocket.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+		
+		function RealtimeSecurity4() {
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg";
+			var entityId = "496519b0-a66d-11ea-9489-bdb47a748ec1";
+            var webSocket = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket.close();
+            }
+
+            webSocket.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket.send(data);
+
+                
+            };
+
+            webSocket.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[4].cells[0].innerHTML = formattedTime;
+				table.rows[4].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[4].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[4].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[4].cells[3].innerHTML == "OFF") {
+					table.rows[4].cells[3].style.backgroundColor = "green";
+					table.rows[4].cells[3].style.color = "white";
+				} else {
+					table.rows[4].cells[3].style.backgroundColor = "red";
+					table.rows[4].cells[3].style.color = "black";
+				}
+                
+            };
+
+            webSocket.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+
+		function RealtimeSecurity5() {
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg";
+			var entityId = "0c545180-a66d-11ea-9489-bdb47a748ec1";
+            var webSocket = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket.close();
+            }
+
+            webSocket.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket.send(data);
+
+                
+            };
+
+            webSocket.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[5].cells[0].innerHTML = formattedTime;
+				table.rows[5].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[5].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[5].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[5].cells[3].innerHTML == "OFF") {
+					table.rows[5].cells[3].style.backgroundColor = "green";
+					table.rows[5].cells[3].style.color = "white";
+				} else {
+					table.rows[5].cells[3].style.backgroundColor = "red";
+				}
+                
+            };
+
+            webSocket.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+		function prova(){
+			var id = document.getElementById("statue").value;
+			var room = document.getElementById("room").value;
+
+			console.log(id);
+			console.log(room);
+
+			var device;
+
+			switch (id) {
+				case "statue1":
+					
+				device = "38327840-a5a5-11ea-9489-bdb47a748ec1"
+
+					break;
+
+				case "statue2":
+					
+				device = "2a5a8bb0-a66b-11ea-9489-bdb47a748ec1"
+
+					break;
+
+				case "statue3":
+
+				device = "b53c5ea0-a66d-11ea-9489-bdb47a748ec1"
+					
+					break;
+
+				case "statue4":
+
+				device = "496519b0-a66d-11ea-9489-bdb47a748ec1"
+					
+					break;
+
+				case "statue5":
+
+				device = "0c545180-a66d-11ea-9489-bdb47a748ec1"
+					
+					break;
+			
+				default:
+					break;
+			}
+
+			var xhttp3 = new XMLHttpRequest();    /* post on thingsboard for x axis value */
+			xhttp3.open('POST', 'https://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/' + device + '/timeseries/SERVER_SCOPE');
+			xhttp3.setRequestHeader('Content-Type', 'application/json');
+			xhttp3.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg');
+			
+			xhttp3.send('{"RoomNumber":' + room + "}");
+
+		};
+		
+			
+
+/*         function securityFunction() {			//Displays the last hour values for temperature from both devices
+
+			var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+			var currentTime = new Date().getTime();
+			var olderTime = currentTime - 3600000;
+
+            var xhttp = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 3600000 to currentTime )
+			xhttp.open('GET', 'http://demo.thingsboard.io/api/plugins/telemetry/DEVICE/0324b2e0-6ad0-11ea-ad02-b3576b7d39f1/values/timeseries?keys=temperature,device&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp.setRequestHeader('Content-Type', 'application/json');
+			xhttp.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmRyZXc5NmZlcnJhcmFAaG90bWFpbC5pdCIsInNjb3BlcyI6WyJSRUZSRVNIX1RPS0VOIl0sInVzZXJJZCI6ImQ4NDIyNzEwLTZhY2YtMTFlYS04ZTBhLTdkMGVmMmE2ODJkMyIsImlzUHVibGljIjpmYWxzZSwiaXNzIjoidGhpbmdzYm9hcmQuaW8iLCJqdGkiOiI5M2E2MzZiMi05Mjg4LTQxOTctODFmNS04NzlmMzU0MTRiZjQiLCJpYXQiOjE1ODkxODk5MTAsImV4cCI6MTYyNTE4OTkxMH0.xdThntp0cBDE2QSsm6Mb8bBzU4ZTrNAD9gnRICnJN5Kia2dZDFkDcK5-Uv0NJQb9SaZwyNoRFquGopBeeA6SXA'); //X-Authorization to access thingsboard account
+			xhttp.send();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(this.responseText);
+
+					//storing parsed results in corresponding vectors, so we can access the data.
+					var temp = response.temperature;		
+					var dev = response.device;
+
+					for (var i = 0; i < temp.length; i++) {			//For cycle to build TabTemp table.
+
+							var table = document.getElementById("TabSec");
+
+							var row = table.insertRow();
+
+							var cell0 = row.insertCell(0);
+							var cell1 = row.insertCell(1);
+							var cell2 = row.insertCell(2);
+							var cell3 = row.insertCell(3);
+
+								var date = new Date(temp[i].ts);
+								var year = date.getFullYear();
+								var month = months[date.getMonth()];
+								var day = date.getDate();
+								// Hours part from the timestamp
+								var hours = date.getHours();
+								// Minutes part from the timestamp
+								var minutes = date.getMinutes();
+								// Seconds part from the timestamp
+								var seconds = date.getSeconds();
+								var milliseconds = date.getMilliseconds();
+
+								// Will display timestamp in a human-friendly format
+								var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+								
+								cell0.innerHTML = Number(temp[i].ts);
+								cell1.innerHTML = formattedTime;
+								cell2.innerHTML = Number(temp[i].value).toFixed(2) + "°";
+								cell3.innerHTML = dev[i].value;
+
+						}
+
+						console.log(response);					
+
+				}
+
+			};
+
+
+			var xhttp2 = new XMLHttpRequest();			//Second Get Request to get temperature telemetries from second device; it needs device ID, keys, and the time interval (from currentTime - 336000000 to currentTime )
+			xhttp2.open('GET', 'http://demo.thingsboard.io/api/plugins/telemetry/DEVICE/032c2cf0-6ad0-11ea-ad02-b3576b7d39f1/values/timeseries?keys=temperature,device&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp2.setRequestHeader('Content-Type', 'application/json');
+			xhttp2.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmRyZXc5NmZlcnJhcmFAaG90bWFpbC5pdCIsInNjb3BlcyI6WyJURU5BTlRfQURNSU4iXSwidXNlcklkIjoiZDg0MjI3MTAtNmFjZi0xMWVhLThlMGEtN2QwZWYyYTY4MmQzIiwiZmlyc3ROYW1lIjoiQW5kcmVhIiwibGFzdE5hbWUiOiJGZXJyYXJhIiwiZW5hYmxlZCI6dHJ1ZSwicHJpdmFjeVBvbGljeUFjY2VwdGVkIjp0cnVlLCJpc1B1YmxpYyI6ZmFsc2UsInRlbmFudElkIjoiZDgwNDVhYzAtNmFjZi0xMWVhLThlMGEtN2QwZWYyYTY4MmQzIiwiY3VzdG9tZXJJZCI6IjEzODE0MDAwLTFkZDItMTFiMi04MDgwLTgwODA4MDgwODA4MCIsImlzcyI6InRoaW5nc2JvYXJkLmlvIiwiaWF0IjoxNTg2NTM0ODkyLCJleHAiOjE1ODgzMzQ4OTJ9.tuhh-UfBGHfy5PhAUvoy0vQFTxa3nMvQUlAMWAwRbH6NU3aQ3kK1cICEZrGZn-RppJmEfAE8yIxRtfjEXo2AjA');
+			xhttp2.send();
+			xhttp2.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(this.responseText);
+
+					//storing parsed results in corresponding vectors, so we can access the data.
+					var temp = response.temperature;
+					var dev = response.device;
+
+					for (var i = 0; i < temp.length; i++) {			//For cycle to build TabTemp table.
+
+							var table = document.getElementById("TabSec");
+							
+
+							var row = table.insertRow();
+
+							var cell0 = row.insertCell(0);
+							var cell1 = row.insertCell(1);
+							var cell2 = row.insertCell(2);
+							var cell3 = row.insertCell(3);
+
+								var date = new Date(temp[i].ts);
+								var year = date.getFullYear();
+								var month = months[date.getMonth()];
+								var day = date.getDate();
+								// Hours part from the timestamp
+								var hours = date.getHours();
+								// Minutes part from the timestamp
+								var minutes = date.getMinutes();
+								// Seconds part from the timestamp
+								var seconds = date.getSeconds();
+								var milliseconds = date.getMilliseconds();
+
+								// Will display timestamp in a human-friendly format
+								var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+								cell0.innerHTML = Number(temp[i].ts);
+								cell1.innerHTML = formattedTime;
+								cell2.innerHTML = Number(temp[i].value).toFixed(2) + "°";
+								cell3.innerHTML = dev[i].value;
+
+					}
+
+						console.log(response);
+
+				}
+
+			};
+
+
+		}
+
+	 */
+
+    </script>
+
+</head>
+<body onload="RealtimeSecurity(); RealtimeSecurity2(); RealtimeSecurity3(); RealtimeSecurity4(); RealtimeSecurity5();" style="margin: 0px;">	<!-- On page load, execute funcions -->
+
+
+<div id="header" style="width: 100%; height: 300px;">
+	
+	<h1 style="position: absolute;
+    left: 35%;
+    top: 100px;
+    color: wheat;
+    text-shadow: 2px 2px black;">Arte Classica Museum - Security Control Panel</h1>
+</div>
+
+<ul>
+	<li class="menu"><a class="active" href="index.html">Home</a></li>
+	<li class="menu"><a href="history.html">History</a></li>
+	<li class="menu"><a href="info.html">Info</a></li>
+	<li class="menu"><a href="about.html">About</a></li>
+</ul>
+
+<div style="left:10%; min-width: 80%; max-width: 80%; position: absolute; top: 650px; margin: 10px;">
+
+
+	<h3 style="text-align: center; position: relative;"> Real-Time Distance Control Table <button onclick="sortTableSec()">Sort by ID</button></h3>				<!--TabTemp and sortTableT button-->
+
+	<table id="TabSec">
+		<tr>
+			<th>Timestamp</th>
+			<th>Statue Id</th>
+			<th>Distance</th>
+			<th>Alarm</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+
+	<div style="margin-top: 100px;">
+
+		<h3 style="text-align: center; position: relative;"> Museum Room Set Form</h3>	
+
+		<form  id="roomselector">
+	
+		<label for="statue">Statue ID</label>
+			<select id="statue" name="statue">
+			  <option value="statue1">Statue 1</option>
+			  <option value="statue2">Statue 2</option>
+			  <option value="statue3">Statue 3</option>
+			  <option value="statue4">Statue 4</option>
+			  <option value="statue5">Statue 5</option>
+			</select>
+	
+		  <label style="margin-left: 20px;" for="room">Room Number</label>
+		  <input type="text" id="room" name="room" placeholder="Insert the room number">
+	  
+		  
+		</form>
+		<button style="position: relative; left: 46%; margin-bottom: 100px;" onclick="prova()">Submit</button>
+	  </div>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+
+<html>
+<head>
+
+	<link rel="stylesheet" href="web/css1.css" type="text/css" media="screen, projection">
+
+	<script src="https://kit.fontawesome.com/c41d189736.js" crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    <script type="text/javascript">
+
+		var ascending = false;
+	
+
+		function sortTableHis() {
+
+		  var table, rows, switching, i, x, y, shouldSwitch;
+		  table = document.getElementById("TabHis");
+		  switching = true;
+		  /*Make a loop that will continue until
+		  no switching has been done:*/
+			if (ascending == false) {
+				ascending = true;
+			} else {
+				ascending = false;
+			}
+
+
+			if (ascending == true) {
+
+				while (switching) {
+					//start by saying: no switching is done:
+					switching = false;
+					rows = table.rows;
+					/*Loop through all table rows (except the
+					first, which contains table headers):*/
+					for (i = 1; i < (rows.length - 1); i++) {
+					//start by saying there should be no switching:
+					shouldSwitch = false;
+					/*Get the two elements you want to compare,
+					one from current row and one from the next:*/
+					x = rows[i].getElementsByTagName("TD")[0];
+					y = rows[i + 1].getElementsByTagName("TD")[0];
+					//check if the two rows should switch place:
+					if (Number(x.innerHTML) < Number(y.innerHTML)) {
+						//if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;
+					}
+					}
+					if (shouldSwitch) {
+					/*If a switch has been marked, make the switch
+					and mark that a switch has been done:*/
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					}
+				}
+			} else {
+
+		  while (switching) {
+			//start by saying: no switching is done:
+			switching = false;
+			rows = table.rows;
+			/*Loop through all table rows (except the
+			first, which contains table headers):*/
+			for (i = 1; i < (rows.length - 1); i++) {
+			  //start by saying there should be no switching:
+			  shouldSwitch = false;
+			  /*Get the two elements you want to compare,
+			  one from current row and one from the next:*/
+			  x = rows[i].getElementsByTagName("TD")[0];
+			  y = rows[i + 1].getElementsByTagName("TD")[0];
+			  //check if the two rows should switch place:
+			  if (Number(x.innerHTML) > Number(y.innerHTML)) {
+				//if so, mark as a switch and break the loop:
+				shouldSwitch = true;
+				break;
+			  }
+			}
+			if (shouldSwitch) {
+			  /*If a switch has been marked, make the switch
+			  and mark that a switch has been done:*/
+			  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			  switching = true;
+			}
+		  }
+			}
+	}
+
+
+        function historyFunction() {			//Displays the last hour values for temperature from both devices
+
+			var roomStatue1 = 1;
+			var roomStatue2 = 1;
+			var roomStatue3 = 2;
+			var roomStatue4 = 3;
+			var roomStatue5 = 3;
+
+			var currentTime = new Date().getTime();
+			var olderTime = currentTime - 86400000;
+
+            var xhttp = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
+			xhttp.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/38327840-a5a5-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp.setRequestHeader('Content-Type', 'application/json');
+			xhttp.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
+			xhttp.send();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(this.responseText);
+
+					//storing parsed results in corresponding vectors, so we can access the data.
+					var alarm = response.Alarm;		
+					var ID = response.ID;
+					var room = response.RoomNumber;
+					var j = 0;
+
+					for (var i = 0; i < alarm.length; i++) {			//For cycle to build TabTemp table.
+
+							if (alarm[i].value == "ON") {
+								j++
+							}
+
+					}
+
+					var table = document.getElementById("TabHis");
+
+					var row = table.insertRow();
+
+					var cell0 = row.insertCell(0);
+					var cell1 = row.insertCell(1);
+					var cell2 = row.insertCell(2);
+
+					cell0.innerHTML = Number(ID[0].value);
+					cell1.innerHTML = Number(room[0].value);
+					cell2.innerHTML = j;
+
+					console.log(response);					
+
+				}
+
+			};
+
+			var xhttp2 = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
+			xhttp2.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/2a5a8bb0-a66b-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp2.setRequestHeader('Content-Type', 'application/json');
+			xhttp2.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
+			xhttp2.send();
+			xhttp2.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(this.responseText);
+
+					//storing parsed results in corresponding vectors, so we can access the data.
+					var alarm = response.Alarm;		
+					var ID = response.ID;
+					var room = response.RoomNumber;
+					var j = 0;
+
+					for (var i = 0; i < alarm.length; i++) {			//For cycle to build TabTemp table.
+
+						if (alarm[i].value == "ON") {
+							j++
+						}
+
+					}
+
+					var table = document.getElementById("TabHis");
+
+					var row = table.insertRow();
+
+					var cell0 = row.insertCell(0);
+					var cell1 = row.insertCell(1);
+					var cell2 = row.insertCell(2);
+
+							
+					cell0.innerHTML = Number(ID[0].value);
+					cell1.innerHTML = Number(room[0].value);
+					cell2.innerHTML = j;
+
+					console.log(response);					
+
+				}
+
+			};
+			
+
+			var xhttp3 = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
+			xhttp3.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/b53c5ea0-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp3.setRequestHeader('Content-Type', 'application/json');
+			xhttp3.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
+			xhttp3.send();
+			xhttp3.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(this.responseText);
+
+					//storing parsed results in corresponding vectors, so we can access the data.
+					var alarm = response.Alarm;		
+					var ID = response.ID;
+					var room = response.RoomNumber;
+					var j = 0;
+
+					for (var i = 0; i < alarm.length; i++) {			//For cycle to build TabTemp table.
+
+							if (alarm[i].value == "ON") {
+								j++
+							}
+
+						}
+
+						var table = document.getElementById("TabHis");
+
+						var row = table.insertRow();
+
+						var cell0 = row.insertCell(0);
+						var cell1 = row.insertCell(1);
+						var cell2 = row.insertCell(2);
+
+							
+							cell0.innerHTML = Number(ID[0].value);
+							cell1.innerHTML = Number(room[0].value);
+							cell2.innerHTML = j;
+
+						console.log(response);					
+
+				}
+
+			};
+
+			var xhttp4 = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
+			xhttp4.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/496519b0-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp4.setRequestHeader('Content-Type', 'application/json');
+			xhttp4.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
+			xhttp4.send();
+			xhttp4.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(this.responseText);
+
+					//storing parsed results in corresponding vectors, so we can access the data.
+					var alarm = response.Alarm;		
+					var ID = response.ID;
+					var room = response.RoomNumber;
+					var j = 0;
+
+					for (var i = 0; i < alarm.length; i++) {			//For cycle to build TabTemp table.
+
+							if (alarm[i].value == "ON") {
+								j++
+							}
+
+						}
+
+						var table = document.getElementById("TabHis");
+
+						var row = table.insertRow();
+
+						var cell0 = row.insertCell(0);
+						var cell1 = row.insertCell(1);
+						var cell2 = row.insertCell(2);
+
+							
+							cell0.innerHTML = Number(ID[0].value);
+							cell1.innerHTML = Number(room[0].value);
+							cell2.innerHTML = j;
+
+						console.log(response);					
+
+				}
+
+			};
+
+			var xhttp5 = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
+			xhttp5.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/0c545180-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp5.setRequestHeader('Content-Type', 'application/json');
+			xhttp5.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
+			xhttp5.send();
+			xhttp5.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(this.responseText);
+
+					//storing parsed results in corresponding vectors, so we can access the data.
+					var alarm = response.Alarm;		
+					var ID = response.ID;
+					var room = response.RoomNumber;
+					var j = 0;
+
+					for (var i = 0; i < alarm.length; i++) {			//For cycle to build TabTemp table.
+
+							if (alarm[i].value == "ON") {
+								j++
+							}
+
+						}
+
+						var table = document.getElementById("TabHis");
+
+						var row = table.insertRow();
+
+						var cell0 = row.insertCell(0);
+						var cell1 = row.insertCell(1);
+						var cell2 = row.insertCell(2);
+
+							
+							cell0.innerHTML = Number(ID[0].value);
+							cell1.innerHTML = Number(room[0].value);
+							cell2.innerHTML = j;
+
+						console.log(response);					
+
+				}
+
+			};
+
+			
+
+		}
+
+	
+
+    </script>
+
+</head>
+<body onload="historyFunction();" style="margin: 0px;">	<!-- On page load, execute funcions -->
+
+
+<div id="header" style="width: 100%; height: 300px;">
+	
+	<h1 style="position: absolute;
+    left: 35%;
+    top: 100px;
+    color: wheat;
+    text-shadow: 2px 2px black;">Arte Classica Museum - Security Control Panel</h1>
+</div>
+
+<ul>
+	<li class="menu"><a href="index.html">Home</a></li>
+	<li class="menu"><a class="active" href="history.html">History</a></li>
+	<li class="menu"><a href="info.html">Info</a></li>
+	<li class="menu"><a href="about.html">About</a></li>
+</ul>
+
+<div>
+
+	<h2 style="color: white; position: relative; left: 35%; margin-top: 50px; font-size: 48px; text-shadow: 2px 2px black;">Look at M.E. - History</h2>
+
+</div>
+
+<div style="left: 15%; position: absolute; top: 650px; margin: 10px;">
+
+
+	<h3 style="text-align: center; position: relative;"> History - Distance Control Table <button onclick="sortTableHis()">Sort by ID</button></h3>				<!--TabTemp and sortTableT button-->
+
+	<table id="TabHis">
+		<tr>
+			<th>Statue Id</th>
+			<th>Room Number</th>
+			<th>N° of infractions</th>
+		</tr>
+	</table>
+
+</div>
+
+</body>
+</html>
