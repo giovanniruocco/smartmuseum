@@ -9,7 +9,7 @@ We will begin with the personas we used to empathize with their needs, also, lat
 
 These are the links to the previous documents:
  - [Design, second delivery, 28/05](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/Design_2805.md)
- - [Design, first delivery](google.it)
+ - [Design, first delivery](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/Design.md)
 
 # Personas
 
