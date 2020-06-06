@@ -103,7 +103,7 @@
 			var olderTime = currentTime - 86400000;
 
             var xhttp = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
-			xhttp.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/38327840-a5a5-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/38327840-a5a5-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&agg=AVG');
 			xhttp.setRequestHeader('Content-Type', 'application/json');
 			xhttp.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
 			xhttp.send();
@@ -144,7 +144,7 @@
 			};
 
 			var xhttp2 = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
-			xhttp2.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/2a5a8bb0-a66b-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp2.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/2a5a8bb0-a66b-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&agg=AVG');
 			xhttp2.setRequestHeader('Content-Type', 'application/json');
 			xhttp2.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
 			xhttp2.send();
@@ -187,7 +187,7 @@
 			
 
 			var xhttp3 = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
-			xhttp3.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/b53c5ea0-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp3.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/b53c5ea0-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&agg=AVG');
 			xhttp3.setRequestHeader('Content-Type', 'application/json');
 			xhttp3.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
 			xhttp3.send();
@@ -229,7 +229,7 @@
 			};
 
 			var xhttp4 = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
-			xhttp4.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/496519b0-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp4.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/496519b0-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&agg=AVG');
 			xhttp4.setRequestHeader('Content-Type', 'application/json');
 			xhttp4.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
 			xhttp4.send();
@@ -271,7 +271,7 @@
 			};
 
 			var xhttp5 = new XMLHttpRequest();			//First Get Request to get temperature telemetries from first device; it needs device ID, keys, and the time interval (from currentTime - 86400000 to currentTime )
-			xhttp5.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/0c545180-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&limit=60&agg=AVG');
+			xhttp5.open('GET', 'http://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/0c545180-a66d-11ea-9489-bdb47a748ec1/values/timeseries?keys=Alarm,ID,RoomNumber&startTs='+ olderTime + '&endTs=' + currentTime + '&agg=AVG');
 			xhttp5.setRequestHeader('Content-Type', 'application/json');
 			xhttp5.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJyYXJhLjE4ODc1MDVAc3R1ZGVudGkudW5pcm9tYTEuaXQiLCJzY29wZXMiOlsiVEVOQU5UX0FETUlOIl0sInVzZXJJZCI6IjJmMmNjNmEwLWE0ZGUtMTFlYS04YzZiLWFiZjE1YTdhNGEyZSIsImZpcnN0TmFtZSI6Ikdpb3Zhbm5pIiwibGFzdE5hbWUiOiJSdW9jY28iLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIyZjBlNDIyMC1hNGRlLTExZWEtOGM2Yi1hYmYxNWE3YTRhMmUiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTExMDg2MDIsImV4cCI6MTU5MjkwODYwMn0.Va-Kt1map2fjQLjiwEnFjSfddiji-G_32lyqTjAxzkDpY9aCyv8mJwc6tEFshXZFR23uItF8cnzAqw7g66i4hg'); //X-Authorization to access thingsboard account
 			xhttp5.send();
@@ -349,7 +349,7 @@
 <div style="left: 15%; position: absolute; top: 650px; margin: 10px;">
 
 
-	<h3 style="text-align: center; position: relative;"> History - Distance Control Table <button onclick="sortTableHis()">Sort by ID</button></h3>				<!--TabTemp and sortTableT button-->
+	<h3 style="text-align: center; position: relative;"> History - Distance Control Table <button onclick="sortTableHis()">Sort by ID</button></h3>			
 
 	<table id="TabHis">
 		<tr>
