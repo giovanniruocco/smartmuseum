@@ -264,7 +264,7 @@ As we said the real-time data is shown in the web page that is accesible by the 
 
 To do so, we implemented via Thingsboard an integration to a Telegram bot that sends a message when an infraction is in act giving also the ID of the concerned statue
 
-![Telegram Bot](https://github.com/giovanniruocco/smartmuseum/blob/master/images/telegrambot.PNG)
+![Telegram Bot](https://github.com/giovanniruocco/smartmuseum/blob/master/images/telegrambot.png)
 
 ---
 
