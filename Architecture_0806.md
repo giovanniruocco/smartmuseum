@@ -169,6 +169,8 @@ Moreover, we need a computer to be connected via bluetooth to the board so that 
 
 The software components and tools of the product are a lot and different in their purposes; we have in fact different software to create the firmware and show collected data that uses libraries and APIs to access the sensor or publish telemetries.
 
+![Network Diagram](https://github.com/giovanniruocco/smartmuseum/blob/master/images/nd.png)
+
 
 ### **Arduino IDE**
 
