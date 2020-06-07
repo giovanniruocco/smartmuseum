@@ -37,9 +37,8 @@ The project's development will be reported following each step and new implement
 
 #### 08/06/2020 Updated Videos and Presentations
 
-- [Future Plans](https://youtu.be/mgdUje6jdrk)
-- [Evaluation](https://youtu.be/G556htPPm2g)
-- [Technical presentation and Demo](https://www.youtube.com/watch?v=qv295bPE5Qw)
+- [Look at M.E. Working Demo](https://www.youtube.com/watch?v=SqvsZhYC5cQ&feature=emb_title)
+
 
 ## Older Entries:
 
