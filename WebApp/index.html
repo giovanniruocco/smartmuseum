@@ -1,0 +1,660 @@
+
+<html>
+<head>
+
+	<link rel="stylesheet" href="web/css1.css" type="text/css" media="screen, projection">
+
+	<script src="https://kit.fontawesome.com/c41d189736.js" crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    <script type="text/javascript">
+
+		var ascending = false;
+	
+
+		function sortTableSec() {
+		console.log("sorting");
+		  var table, rows, switching, i, x, y, shouldSwitch;
+		  table = document.getElementById("TabSec");
+		  switching = true;
+		  /*Make a loop that will continue until
+		  no switching has been done:*/
+			if (ascending == false) {
+				ascending = true;
+			} else {
+				ascending = false;
+			}
+
+
+			if (ascending == true) {
+
+				while (switching) {
+					//start by saying: no switching is done:
+					switching = false;
+					rows = table.rows;
+					/*Loop through all table rows (except the
+					first, which contains table headers):*/
+					for (i = 1; i < (rows.length - 1); i++) {
+					//start by saying there should be no switching:
+					shouldSwitch = false;
+					/*Get the two elements you want to compare,
+					one from current row and one from the next:*/
+					x = rows[i].getElementsByTagName("TD")[1];
+					y = rows[i + 1].getElementsByTagName("TD")[1];
+					//check if the two rows should switch place:
+					if (Number(x.innerHTML) < Number(y.innerHTML)) {
+						//if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;
+					}
+					}
+					if (shouldSwitch) {
+					/*If a switch has been marked, make the switch
+					and mark that a switch has been done:*/
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					}
+				}
+			} else {
+
+		  while (switching) {
+			//start by saying: no switching is done:
+			switching = false;
+			rows = table.rows;
+			/*Loop through all table rows (except the
+			first, which contains table headers):*/
+			for (i = 1; i < (rows.length - 1); i++) {
+			  //start by saying there should be no switching:
+			  shouldSwitch = false;
+			  /*Get the two elements you want to compare,
+			  one from current row and one from the next:*/
+			  x = rows[i].getElementsByTagName("TD")[1];
+			  y = rows[i + 1].getElementsByTagName("TD")[1];
+			  //check if the two rows should switch place:
+			  if (Number(x.innerHTML) > Number(y.innerHTML)) {
+				//if so, mark as a switch and break the loop:
+				shouldSwitch = true;
+				break;
+			  }
+			}
+			if (shouldSwitch) {
+			  /*If a switch has been marked, make the switch
+			  and mark that a switch has been done:*/
+			  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			  switching = true;
+			}
+		  }
+			}
+	}
+
+
+function RealtimeSecurity() { 			//websocket call to get real time measurements for statue 1
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnaW92YW5uaS5ydW9jY285QHlhaG9vLml0Iiwic2NvcGVzIjpbIlRFTkFOVF9BRE1JTiJdLCJ1c2VySWQiOiIxNDQxNDlmMC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJmaXJzdE5hbWUiOiJBbmRyZWEiLCJsYXN0TmFtZSI6IlZvbmEiLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIxNDIwMmQ2MC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTMxODMwMTYsImV4cCI6MTU5NDk4MzAxNn0.PkvBedcq39cXMXMjhPJB8fq9HGmt4VUfNVFw3Axlx5dw5ykxEerWI_OsB-sRvlw4jGgvDg4LkU76SBZ9WsZ14A";
+			var entityId = "2845e210-b7ba-11ea-b882-a5cf7e26107d";
+            var webSocket = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket.close();
+            }
+
+            webSocket.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket.send(data);
+
+                
+            };
+
+            webSocket.onmessage = function (event) {
+		
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[1].cells[0].innerHTML = formattedTime;
+				table.rows[1].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[1].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[1].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[1].cells[3].innerHTML == "OFF") {
+					table.rows[1].cells[3].style.backgroundColor = "green";
+					table.rows[1].cells[3].style.color = "white";
+				} else {
+					table.rows[1].cells[3].style.backgroundColor = "red";
+				}
+                
+            };
+
+            webSocket.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+
+		function RealtimeSecurity2() { 			//websocket call to get real time measurements for statue 2
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnaW92YW5uaS5ydW9jY285QHlhaG9vLml0Iiwic2NvcGVzIjpbIlRFTkFOVF9BRE1JTiJdLCJ1c2VySWQiOiIxNDQxNDlmMC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJmaXJzdE5hbWUiOiJBbmRyZWEiLCJsYXN0TmFtZSI6IlZvbmEiLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIxNDIwMmQ2MC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTMxODMwMTYsImV4cCI6MTU5NDk4MzAxNn0.PkvBedcq39cXMXMjhPJB8fq9HGmt4VUfNVFw3Axlx5dw5ykxEerWI_OsB-sRvlw4jGgvDg4LkU76SBZ9WsZ14A";
+			var entityId = "65d10a60-b7ba-11ea-b882-a5cf7e26107d";
+            var webSocket2 = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket2.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket2.close();
+            }
+
+            webSocket2.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket2.send(data);
+
+                
+            };
+
+            webSocket2.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[2].cells[0].innerHTML = formattedTime;
+				table.rows[2].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[2].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[2].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[2].cells[3].innerHTML == "OFF") {
+					table.rows[2].cells[3].style.backgroundColor = "green";
+					table.rows[2].cells[3].style.color = "white";
+				} else {
+					table.rows[2].cells[3].style.backgroundColor = "red";
+				}
+                
+            };
+
+            webSocket2.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+		function RealtimeSecurity3() { 			//websocket call to get real time measurements for statue 3
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnaW92YW5uaS5ydW9jY285QHlhaG9vLml0Iiwic2NvcGVzIjpbIlRFTkFOVF9BRE1JTiJdLCJ1c2VySWQiOiIxNDQxNDlmMC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJmaXJzdE5hbWUiOiJBbmRyZWEiLCJsYXN0TmFtZSI6IlZvbmEiLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIxNDIwMmQ2MC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTMxODMwMTYsImV4cCI6MTU5NDk4MzAxNn0.PkvBedcq39cXMXMjhPJB8fq9HGmt4VUfNVFw3Axlx5dw5ykxEerWI_OsB-sRvlw4jGgvDg4LkU76SBZ9WsZ14A";
+			var entityId = "65e04ca0-b7ba-11ea-b882-a5cf7e26107d";
+            var webSocket = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket.close();
+            }
+
+            webSocket.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket.send(data);
+
+                
+            };
+
+            webSocket.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[3].cells[0].innerHTML = formattedTime;
+				table.rows[3].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[3].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[3].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[3].cells[3].innerHTML == "OFF") {
+					table.rows[3].cells[3].style.backgroundColor = "green";
+					table.rows[3].cells[3].style.color = "white";
+				} else {
+					table.rows[3].cells[3].style.backgroundColor = "red";
+				}
+                
+            };
+
+            webSocket.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+		
+		function RealtimeSecurity4() { 			//websocket call to get real time measurements for statue 4
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnaW92YW5uaS5ydW9jY285QHlhaG9vLml0Iiwic2NvcGVzIjpbIlRFTkFOVF9BRE1JTiJdLCJ1c2VySWQiOiIxNDQxNDlmMC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJmaXJzdE5hbWUiOiJBbmRyZWEiLCJsYXN0TmFtZSI6IlZvbmEiLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIxNDIwMmQ2MC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTMxODMwMTYsImV4cCI6MTU5NDk4MzAxNn0.PkvBedcq39cXMXMjhPJB8fq9HGmt4VUfNVFw3Axlx5dw5ykxEerWI_OsB-sRvlw4jGgvDg4LkU76SBZ9WsZ14A";
+			var entityId = "65e3cf10-b7ba-11ea-b882-a5cf7e26107d";
+            var webSocket = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket.close();
+            }
+
+            webSocket.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket.send(data);
+
+                
+            };
+
+            webSocket.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[4].cells[0].innerHTML = formattedTime;
+				table.rows[4].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[4].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[4].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[4].cells[3].innerHTML == "OFF") {
+					table.rows[4].cells[3].style.backgroundColor = "green";
+					table.rows[4].cells[3].style.color = "white";
+				} else {
+					table.rows[4].cells[3].style.backgroundColor = "red";
+					table.rows[4].cells[3].style.color = "black";
+				}
+                
+            };
+
+            webSocket.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+
+		function RealtimeSecurity5() { 			//websocket call to get real time measurements for statue 5
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnaW92YW5uaS5ydW9jY285QHlhaG9vLml0Iiwic2NvcGVzIjpbIlRFTkFOVF9BRE1JTiJdLCJ1c2VySWQiOiIxNDQxNDlmMC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJmaXJzdE5hbWUiOiJBbmRyZWEiLCJsYXN0TmFtZSI6IlZvbmEiLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIxNDIwMmQ2MC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTMxODMwMTYsImV4cCI6MTU5NDk4MzAxNn0.PkvBedcq39cXMXMjhPJB8fq9HGmt4VUfNVFw3Axlx5dw5ykxEerWI_OsB-sRvlw4jGgvDg4LkU76SBZ9WsZ14A";
+			var entityId = "65be6cc0-b7ba-11ea-b882-a5cf7e26107d";
+            var webSocket = new WebSocket("wss://cloud.thingsboard.io/api/ws/plugins/telemetry?token=" + token);
+
+            if (entityId === "YOUR_DEVICE_ID") {
+                alert("Invalid device id!");
+                webSocket.close();
+            }
+
+            if (token === "YOUR_JWT_TOKEN") {
+                alert("Invalid JWT token!");
+                webSocket.close();
+            }
+
+            webSocket.onopen = function () {
+							
+
+                var object = {
+                    tsSubCmds: [
+                        {
+                            entityType: "DEVICE",
+                            entityId: entityId,                    
+                            scope: "LATEST_TELEMETRY",
+                            cmdId: 10
+                        }
+                    ],
+                    historyCmds: [],
+                    attrSubCmds: []
+                };
+
+
+                var data = JSON.stringify(object);
+                webSocket.send(data);
+
+                
+            };
+
+            webSocket.onmessage = function (event) {
+                var received_msg = event.data;
+                var msg=JSON.parse(event.data);
+
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+				var currentTime = new Date().getTime();
+				
+				var table = document.getElementById("TabSec");
+
+				var date = new Date(msg.data.ID[0][0]);
+				var year = date.getFullYear();
+				var month = months[date.getMonth()];
+				var day = date.getDate();
+				// Hours part from the timestamp
+				var hours = date.getHours();
+				// Minutes part from the timestamp
+				var minutes = date.getMinutes();
+				// Seconds part from the timestamp
+				var seconds = date.getSeconds();
+				var milliseconds = date.getMilliseconds();
+
+				// Will display timestamp in a human-friendly format
+				var formattedTime = day + " " + month + " " + year + " " + hours + ' : ' + minutes + 'm : ' + seconds + "s : " + milliseconds + "ms";
+
+				table.rows[5].cells[0].innerHTML = formattedTime;
+				table.rows[5].cells[1].innerHTML = msg.data.ID[0][1];
+				table.rows[5].cells[2].innerHTML = msg.data.Distance[0][1];
+				table.rows[5].cells[3].innerHTML = msg.data.Alarm[0][1];
+				if (table.rows[5].cells[3].innerHTML == "OFF") {
+					table.rows[5].cells[3].style.backgroundColor = "green";
+					table.rows[5].cells[3].style.color = "white";
+				} else {
+					table.rows[5].cells[3].style.backgroundColor = "red";
+				}
+                
+            };
+
+            webSocket.onclose = function (event) {
+                alert("Connection is closed!");
+            };
+            
+            
+        }
+
+		function setRoom(){  			//function to set room for the statue
+			var id = document.getElementById("statue").value;
+			var room = document.getElementById("room").value;
+
+			console.log(id);
+			console.log(room);
+
+			var device;
+
+			switch (id) {
+				case "statue1":
+					
+				device = "2845e210-b7ba-11ea-b882-a5cf7e26107d"
+
+					break;
+
+				case "statue2":
+					
+				device = "65d10a60-b7ba-11ea-b882-a5cf7e26107d"
+
+					break;
+
+				case "statue3":
+
+				device = "65e04ca0-b7ba-11ea-b882-a5cf7e26107d"
+					
+					break;
+
+				case "statue4":
+
+				device = "65e3cf10-b7ba-11ea-b882-a5cf7e26107d"
+					
+					break;
+
+				case "statue5":
+
+				device = "65be6cc0-b7ba-11ea-b882-a5cf7e26107d"
+					
+					break;
+			
+				default:
+					break;
+			}
+
+			var xhttp3 = new XMLHttpRequest();    /* post on thingsboard for x axis value */
+			xhttp3.open('POST', 'https://cloud.thingsboard.io/api/plugins/telemetry/DEVICE/' + device + '/timeseries/SERVER_SCOPE');
+			xhttp3.setRequestHeader('Content-Type', 'application/json');
+			xhttp3.setRequestHeader('X-Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnaW92YW5uaS5ydW9jY285QHlhaG9vLml0Iiwic2NvcGVzIjpbIlRFTkFOVF9BRE1JTiJdLCJ1c2VySWQiOiIxNDQxNDlmMC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJmaXJzdE5hbWUiOiJBbmRyZWEiLCJsYXN0TmFtZSI6IlZvbmEiLCJlbmFibGVkIjp0cnVlLCJwcml2YWN5UG9saWN5QWNjZXB0ZWQiOnRydWUsImlzUHVibGljIjpmYWxzZSwidGVuYW50SWQiOiIxNDIwMmQ2MC1iN2I4LTExZWEtYjg4Mi1hNWNmN2UyNjEwN2QiLCJjdXN0b21lcklkIjoiMTM4MTQwMDAtMWRkMi0xMWIyLTgwODAtODA4MDgwODA4MDgwIiwiaXNzIjoiY2xvdWQudGhpbmdzYm9hcmQuaW8iLCJpYXQiOjE1OTMxODMwMTYsImV4cCI6MTU5NDk4MzAxNn0.PkvBedcq39cXMXMjhPJB8fq9HGmt4VUfNVFw3Axlx5dw5ykxEerWI_OsB-sRvlw4jGgvDg4LkU76SBZ9WsZ14A');
+			
+			xhttp3.send('{"RoomNumber":' + room + "}");
+
+		};
+		
+
+    </script>
+
+</head>
+<body onload="RealtimeSecurity(); RealtimeSecurity2(); RealtimeSecurity3(); RealtimeSecurity4(); RealtimeSecurity5();" style="margin: 0px;">	<!-- On page load, execute funcions -->
+
+
+<div id="header" style="width: 100%; height: 300px;">
+	
+	<h1 style="position: absolute;
+    left: 35%;
+    top: 100px;
+    color: wheat;
+    text-shadow: 2px 2px black;">Arte Classica Museum - Security Control Panel</h1>
+</div>
+
+<ul>
+	<li class="menu"><a class="active" href="index.html">Home</a></li>
+	<li class="menu"><a href="history.html">History</a></li>
+	<li class="menu"><a href="info.html">Info</a></li>
+	<li class="menu"><a href="about.html">About</a></li>
+</ul>
+
+<div style="left:10%; min-width: 80%; max-width: 80%; position: absolute; top: 650px; margin: 10px;">
+
+
+	<h3 style="text-align: center; position: relative;"> Real-Time Distance Control Table <button onclick="sortTableSec()">Sort by ID</button></h3>				<!--TabTemp and sortTableT button-->
+
+	<table id="TabSec">
+		<tr>
+			<th>Timestamp</th>
+			<th>Statue Id</th>
+			<th>Distance</th>
+			<th>Alarm</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+
+	<div style="margin-top: 100px;">
+
+		<h3 style="text-align: center; position: relative;"> Museum Room Set Form</h3>	
+
+		<form id="roomselector">
+	
+		<label for="statue">Statue ID</label>
+			<select id="statue" name="statue">
+			  <option value="statue1">Statue 1</option>
+			  <option value="statue2">Statue 2</option>
+			  <option value="statue3">Statue 3</option>
+			  <option value="statue4">Statue 4</option>
+			  <option value="statue5">Statue 5</option>
+			</select>
+	
+		  <label style="margin-left: 20px;" for="room">Room Number</label>
+		  <input type="text" id="room" name="room" placeholder="Insert the room number">
+	  
+		  
+		</form>
+		<button style="position: relative; left: 46%; margin-bottom: 100px;" onclick="setRoom()">Submit</button>
+	  </div>
+
+</div>
+
+
+
+</body>
+</html>
