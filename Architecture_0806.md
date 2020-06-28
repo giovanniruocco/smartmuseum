@@ -3,9 +3,9 @@
 ###  **Look at M.E.**
 
 
-In this document we will review the new state of the architecture of Look at M.E. with all the changes taken to address the main problems and details pointed out in the first presentation of the project.
+In this document we will review the new state of the architecture of Look at M.E. with all the changes taken to address the main problems and details pointed out in the earlier presentations of the project.
 
-The older version of this document will be available in the main repository of Look at M.E. so that anyone who wishes to can take a look at the evolution of the project.
+The older versions of this document will be available in the main repository of Look at M.E. so that anyone who wishes to can take a look at the evolution of the project.
 
 - [Architecture version 30/04](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/Architecture.md)
 - [Architecture version 28/05](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/Architecture_2805.md)
