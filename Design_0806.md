@@ -42,7 +42,7 @@ Also, since having a lot of plaster statues he can examine, he might not be able
 
 We have divided this section into two parts, where the first one explains the features related to the visitors, while the second one is reserved for the direction of the museum.
 
-Due to the profound differences between the two problems highlighted, even if it’s just one project, Look at M.E. can almost be considered as two systems combined, although independent between them. But we believe that gathering data about popularity, should also lead to involve more the neglected artworks through Look at M.E.’s user functionalities. This would potentially raise their value, therefore raising the value of the entire museum and lastly the quality of the entire user experience. That is why we have decided to carry on trying to solve both issues by creating a more complex service.
+Due to the profound differences between the two problems highlighted, even if it’s just one project, Look at M.E. can almost be considered as two systems combined, although independent between them. But we believe that gathering data about the security to offer a service not only for the museum visitors, but also for the museum staff so that they would feel more secure and satisfied with the product. This means that the museum resources can be managed in a more efficient way, leading to an improvement for the whole experience for the users and staff. That is why we have decided to carry on trying to solve both issues by creating a more complex service.
 
 ## User Functionalities
 
