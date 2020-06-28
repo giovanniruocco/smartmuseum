@@ -2,7 +2,6 @@
 # Look at M.E.
 
 ![Project Logo](https://github.com/giovanniruocco/smartmuseum/blob/master/images/logo.png)
-
 ## IoT Course 2020 - MSc Engineering in computer science - Sapienza
 
 We are a group of students at the MS Course in Engineering in Computer Science at the Sapienza university in Rome supported by a Design Advisor, and in this GitHub repository we will present the project that we worked on to provide the Arte Classica Museum of Sapienza a new experience for the museum visitors as well as helping the curators understand what are the most loved art pieces in the gallery.
