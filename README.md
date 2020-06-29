@@ -12,6 +12,80 @@ The project was developed as part of the Internet of Things course, here are our
 - [Vona Andrea](https://www.linkedin.com/in/andrea-vona-96b832165)
 - [Gironi Camilla](https://www.linkedin.com/in/camilla-gironi)
 
+## Repository
+
+```
+│
+├── Code                  #Code for all the software parts of the project
+│   │
+│   ├── Arduino           #Code for the arduino sketch to flash in the board
+│   │   |   
+│   |   ├── sketch_may11a
+│   │   |     |
+│   |   |     └── sketch_may11a.ino
+|   |   └── LookAtM.E._Terminal.stc
+|   |
+|   |
+│   ├── Devices           #Code for the real and simulated devices
+│   |     │
+│   |     ├── realDevice1.py
+│   |     ├── simulatedDevice2.py
+│   |     ├── simulatedDevice3.py
+│   |     ├── simulatedDevice4.py
+|   |     └── simulatedDevice5.py
+|   |
+|   |
+│   ├── WebApp           #Code for the web application
+│   |     │
+│   |     ├── web
+│   │     |     |
+│   |     |     ├── css1.css
+│   |     |     ├── logo.png
+│   |     |     └── museo.jpg
+│   |     ├── index.html
+│   |     ├── history.html
+│   |     ├── info.html
+|   |     └── about.html
+|   |
+|   |
+|   └── Simulation Clients           #Code for the simulated clients
+|         |
+│         ├── client.py
+│         ├── client2.py
+|         └── client3.py
+│   
+│── Documentation                 #folder for the documents about the project
+│   │
+│   ├── 3rd Delivery.md
+│   ├── Architecture_0806.md
+│   ├── Design_0806.md
+│   ├── Evaluation_0806.md
+│   ├── Presentation_0806.md
+│   └── Old Versions
+│       |
+|       ├── 1st Delivery
+│       |      ├── 1st Delivery.md
+│       |      ├── Architecture.md
+│       |      ├── Design.md
+│       |      ├── Evaluation.md
+│       |      ├── IoT Presentation.pptx
+│       |      └── Presentation.pdf
+|       └── 2nd Delivery
+│              ├── 2nd Delivery.md
+│              ├── Architecture_2805.md
+│              ├── Design_2805.md
+│              ├── Evaluation_2805.md
+│              └── Presentation_2805.pptx
+│
+│   
+├── Images                         #Folder containing all the images
+│   │   
+|   └── ...
+│      
+└── ReadMe.md
+
+```
+
 ## Description
 
 Look at M.E. is an IoT device which is able to improve the user experience for the museum visitors and to provide important data to the museum curator.
@@ -26,11 +100,11 @@ The project's development will be reported following each step and new implement
 
 #### 08/06/2020 Updated Documents
 
-- [Third Delivery](https://github.com/giovanniruocco/smartmuseum/blob/master/3rd%20Delivery.md)
-- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Design_0806.md)
-- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Architecture_0806.md)
-- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Evaluation_0806.md)
-- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation_0806.pdf)
+- [Third Delivery](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/3rd%20Delivery.md)
+- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Design_0806.md)
+- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Architecture_0806.md)
+- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Evaluation_0806.md)
+- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Presentation_0806.pdf)
 
 ### Video:
 
@@ -50,11 +124,11 @@ From the 1st delivery a lot of changes were made regarding the Design and Archit
 
 #### 30/04/2020 Documents
 
-- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/Design.md)
-- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/Architecture.md)
-- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/Evaluation.md)
-- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/Presentation.pdf)
-- [1st Delivery Markdown](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/1st%20Delivery/1st%20Delivery.md)
+- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/1st%20Delivery/Design.md)
+- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/1st%20Delivery/Architecture.md)
+- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/1st%20Delivery/Evaluation.md)
+- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/1st%20Delivery/Presentation.pdf)
+- [1st Delivery Markdown](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/1st%20Delivery/1st%20Delivery.md)
 
 ### Video:
 
@@ -70,11 +144,11 @@ Since the second delivery we have made some changes in the goal of the project s
 
 #### 28/05/2020 Documents
 
-- [Second Delivery](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/2nd%20Delivery.md)
-- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/Design_2805.md)
-- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/Architecture_2805.md)
-- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Old%20Versions/2nd%20Delivery/Evaluation_2805.md)
-- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Presentation_2805.pptx)
+- [Second Delivery](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/2nd%20Delivery/2nd%20Delivery.md)
+- [Design](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/2nd%20Delivery/Design_2805.md)
+- [Architecture](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/2nd%20Delivery/Architecture_2805.md)
+- [Evaluation](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/2nd%20Delivery/Evaluation_2805.md)
+- [Presentation](https://github.com/giovanniruocco/smartmuseum/blob/master/Documentation/Old%20Versions/2nd%20Delivery/Presentation_2805.pptx)
 
 ### Video:
 
