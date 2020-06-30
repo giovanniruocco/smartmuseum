@@ -112,6 +112,9 @@ The project's development will be reported following each step and new implement
 
 - [Look at M.E. Working Demo](https://www.youtube.com/watch?v=SqvsZhYC5cQ&feature=emb_title)
 
+#### LinkedIn Post
+- [LinkedIn Post](https://www.linkedin.com/pulse/look-me-project-built-iot-course-2020-msc-engineering-giovanni-ruocco/?trackingId=UZN6TBWQTY61JeVLmN83wg%3D%3D)
+
 
 ## Older Entries:
 
